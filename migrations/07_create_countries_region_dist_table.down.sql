@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS nationalities;
+DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS regions;
+DROP TABLE IF EXISTS districts;

@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS "offer_version_translations";

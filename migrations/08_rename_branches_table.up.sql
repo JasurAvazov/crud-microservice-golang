@@ -1,0 +1,1 @@
+ALTER TABLE "branches_table" RENAME TO branches;

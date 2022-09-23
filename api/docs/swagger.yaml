@@ -1,0 +1,2781 @@
+definitions:
+  rest.Branch:
+    properties:
+      active:
+        type: boolean
+      address:
+        $ref: '#/definitions/rest.Languages'
+      coords:
+        properties:
+          lat:
+            type: string
+          lng:
+            type: string
+        type: object
+      mfo:
+        type: string
+      oper_code:
+        type: string
+      postal_code:
+        type: string
+      title:
+        $ref: '#/definitions/rest.Languages'
+    type: object
+  rest.CardBin:
+    properties:
+      currency_code:
+        type: string
+      is_add_allowed:
+        type: boolean
+      is_bank_card:
+        type: boolean
+      name:
+        type: string
+      number:
+        type: string
+      processingId:
+        type: string
+    required:
+    - currency_code
+    - name
+    - number
+    - processingId
+    type: object
+  rest.ClientType:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      long_name:
+        $ref: '#/definitions/rest.Languages'
+      short_name:
+        type: string
+      status:
+        type: string
+    required:
+    - active
+    - code
+    - long_name
+    - short_name
+    - status
+    type: object
+  rest.Currency:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      cur_code:
+        type: string
+      name:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code
+    - cur_code
+    - name
+    type: object
+  rest.Languages:
+    properties:
+      en:
+        type: string
+      ru:
+        type: string
+      uz:
+        type: string
+    type: object
+  rest.Marital:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      gender:
+        $ref: '#/definitions/rest.Languages'
+      status:
+        $ref: '#/definitions/rest.Languages'
+    type: object
+  rest.ProcessingSystem:
+    properties:
+      code:
+        type: string
+      is_pay_allowed:
+        type: boolean
+      name:
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  rest.createBranchParams:
+    properties:
+      active:
+        type: boolean
+      address:
+        $ref: '#/definitions/rest.Languages'
+      code:
+        type: string
+      coords:
+        properties:
+          lat:
+            type: string
+          lng:
+            type: string
+        type: object
+      mfo:
+        type: string
+      oper_code:
+        type: string
+      postal_code:
+        type: string
+      title:
+        $ref: '#/definitions/rest.Languages'
+    type: object
+  rest.districtParams:
+    properties:
+      code:
+        type: string
+      code_gni:
+        type: string
+      code_province:
+        type: string
+      code_soato:
+        type: string
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code
+    - code_gni
+    - code_province
+    - code_soato
+    - is_active
+    - title
+    type: object
+  rest.genderParams:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code
+    - id
+    - is_active
+    - title
+    type: object
+  rest.nationalityParams:
+    properties:
+      code:
+        type: string
+      state:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code
+    - state
+    - title
+    type: object
+  rest.offerParams:
+    properties:
+      code:
+        type: string
+      name:
+        $ref: '#/definitions/rest.Languages'
+      should_Be_Signed:
+        type: boolean
+      signature_type:
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  rest.offerVersionParams:
+    properties:
+      activated_at:
+        type: string
+      code:
+        type: string
+      deactivatedA_at:
+        type: string
+    required:
+    - activated_at
+    - code
+    - deactivatedA_at
+    type: object
+  rest.offerVersionTranslationParams:
+    properties:
+      content:
+        type: string
+      locale:
+        type: string
+      name:
+        type: string
+      offer_version_id:
+        type: string
+    required:
+    - content
+    - locale
+    - name
+    - offer_version_id
+    type: object
+  rest.regionParams:
+    properties:
+      code:
+        type: string
+      is_active:
+        type: boolean
+      rank:
+        type: string
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code
+    - is_active
+    - rank
+    - title
+    type: object
+  rest.updateClientType:
+    properties:
+      active:
+        type: boolean
+      long_name:
+        $ref: '#/definitions/rest.Languages'
+      short_name:
+        type: string
+      status:
+        type: string
+    required:
+    - active
+    - long_name
+    - short_name
+    - status
+    type: object
+  rest.updateCurrency:
+    properties:
+      active:
+        type: boolean
+      cur_code:
+        type: string
+      name:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - cur_code
+    - name
+    type: object
+  rest.updateDistrictParams:
+    properties:
+      code_gni:
+        type: string
+      code_province:
+        type: string
+      code_soato:
+        type: string
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - code_gni
+    - code_province
+    - code_soato
+    - is_active
+    - title
+    type: object
+  rest.updateGenderParams:
+    properties:
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - id
+    - is_active
+    - title
+    type: object
+  rest.updateMarital:
+    properties:
+      active:
+        type: boolean
+      gender:
+        $ref: '#/definitions/rest.Languages'
+      status:
+        $ref: '#/definitions/rest.Languages'
+    type: object
+  rest.updateNationalityParams:
+    properties:
+      state:
+        type: boolean
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - state
+    - title
+    type: object
+  rest.updateOfferParams:
+    properties:
+      name:
+        $ref: '#/definitions/rest.Languages'
+      should_Be_Signed:
+        type: boolean
+      signature_type:
+        type: string
+    required:
+    - name
+    type: object
+  rest.updateOfferVersionParams:
+    properties:
+      activated_at:
+        type: string
+      deactivated_at:
+        type: string
+    required:
+    - activated_at
+    - deactivated_at
+    type: object
+  rest.updateOfferVersionTranslationParams:
+    properties:
+      content:
+        type: string
+      locale:
+        type: string
+      name:
+        type: string
+    required:
+    - content
+    - locale
+    - name
+    type: object
+  rest.updateRegionParams:
+    properties:
+      is_active:
+        type: boolean
+      rank:
+        type: string
+      title:
+        $ref: '#/definitions/rest.Languages'
+    required:
+    - is_active
+    - rank
+    - title
+    type: object
+  views.Branch:
+    properties:
+      active:
+        type: boolean
+      address:
+        $ref: '#/definitions/views.Languages'
+      code:
+        type: string
+      coords:
+        properties:
+          lat:
+            type: string
+          lng:
+            type: string
+        type: object
+      mfo:
+        type: string
+      oper_code:
+        type: string
+      postal_code:
+        type: string
+      short_title:
+        $ref: '#/definitions/views.Languages'
+      title:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.CardBin:
+    properties:
+      currency_code:
+        type: string
+      id:
+        type: string
+      is_add_allowed:
+        type: boolean
+      is_bank_card:
+        type: boolean
+      name:
+        type: string
+      number:
+        type: string
+      processing:
+        $ref: '#/definitions/views.ProcessingSystem'
+    type: object
+  views.ClientType:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      long_name:
+        $ref: '#/definitions/views.Languages'
+      short_name:
+        type: string
+      status:
+        type: string
+    type: object
+  views.Currency:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      cur_code:
+        type: string
+      name:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.Gender:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.Languages:
+    properties:
+      en:
+        type: string
+      ru:
+        type: string
+      uz:
+        type: string
+    type: object
+  views.Marital:
+    properties:
+      active:
+        type: boolean
+      code:
+        type: string
+      gender:
+        $ref: '#/definitions/views.Languages'
+      status:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.ProcessingSystem:
+    properties:
+      code:
+        type: string
+      id:
+        type: string
+      is_pay_allowed:
+        type: boolean
+      name:
+        type: string
+    type: object
+  views.R:
+    properties:
+      data: {}
+      error_code:
+        type: integer
+      error_note:
+        type: string
+      status:
+        type: string
+    type: object
+  views.district:
+    properties:
+      code:
+        type: string
+      code_gni:
+        type: string
+      code_province:
+        type: string
+      code_soato:
+        type: string
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.nationality:
+    properties:
+      code:
+        type: string
+      is_active:
+        type: boolean
+      title:
+        $ref: '#/definitions/views.Languages'
+    type: object
+  views.offer:
+    properties:
+      code:
+        type: string
+      name:
+        $ref: '#/definitions/views.Languages'
+      should_be_signed:
+        type: boolean
+      signature_type:
+        type: string
+    type: object
+  views.offerversion:
+    properties:
+      activated_at:
+        type: string
+      code:
+        type: string
+      deactivated_at:
+        type: string
+      id:
+        type: string
+    type: object
+  views.offerversiontranslation:
+    properties:
+      content:
+        type: string
+      locale:
+        type: string
+      name:
+        type: string
+      offer_version_id:
+        type: string
+    type: object
+  views.region:
+    properties:
+      code:
+        type: string
+      is_active:
+        type: boolean
+      rank:
+        type: string
+      title:
+        $ref: '#/definitions/views.Languages'
+    type: object
+info:
+  contact:
+    email: sodikjon.akhmedoff@gmail.com
+    name: API Support
+    url: https://github.com/s-akhmedoff
+  description: CRUD API for all references
+  license:
+    name: Hamkorbank
+    url: https://hamkorbank.uz/
+  title: Reference Service v1
+paths:
+  /branches:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info About Branch With MFO Or Just All Branches
+      parameters:
+      - description: Search By MFO
+        in: query
+        name: mfo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.Branch'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All Branches Or Read Branch With MFO
+      tags:
+      - Branch
+    post:
+      consumes:
+      - application/json
+      description: API for creating a Branch
+      parameters:
+      - description: Branch Params To Create
+        in: body
+        name: branch
+        required: true
+        schema:
+          $ref: '#/definitions/rest.createBranchParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A Branch
+      tags:
+      - Branch
+  /branches/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a filial with code
+      parameters:
+      - description: Branch's code To Delete
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A Branch with code
+      tags:
+      - Branch
+    get:
+      consumes:
+      - application/json
+      description: API for getting a branch with code
+      parameters:
+      - description: code for get Branch
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.Branch'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A Branch with Code
+      tags:
+      - Branch
+    put:
+      consumes:
+      - application/json
+      description: API for updating a filial with ID
+      parameters:
+      - description: Branch's code To Update
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Updated Branch Parameters
+        in: body
+        name: filial
+        required: true
+        schema:
+          $ref: '#/definitions/rest.Branch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A Branch with ID
+      tags:
+      - Branch
+  /card-bins:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info Just All CardBins
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.CardBin'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All CardBins
+      tags:
+      - CardBin
+    post:
+      consumes:
+      - application/json
+      description: API for creating a CardBin
+      parameters:
+      - description: CardBin Params To Create
+        in: body
+        name: branch
+        required: true
+        schema:
+          $ref: '#/definitions/rest.CardBin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A CardBin
+      tags:
+      - CardBin
+  /card-bins/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a cardBin with id
+      parameters:
+      - description: CardBin's id To Delete
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A CardBin with id
+      tags:
+      - CardBin
+    get:
+      consumes:
+      - application/json
+      description: API for getting a cardBin with id
+      parameters:
+      - description: id for get CardBin
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.CardBin'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A CardBin with Id
+      tags:
+      - CardBin
+    put:
+      consumes:
+      - application/json
+      description: API for updating a cardBin with id
+      parameters:
+      - description: CardBin's id To Update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated CardBin Parameters
+        in: body
+        name: cardBin
+        required: true
+        schema:
+          $ref: '#/definitions/rest.CardBin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A CardBin with id
+      tags:
+      - CardBin
+  /card-bins/number/{number}:
+    get:
+      consumes:
+      - application/json
+      description: API for getting a cardBin with number
+      parameters:
+      - description: number for get CardBin
+        in: path
+        name: number
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.CardBin'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A CardBin with Number
+      tags:
+      - CardBin
+  /clients:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info Just All ClientTypes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.ClientType'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All ClientTypes
+      tags:
+      - ClientType
+    post:
+      consumes:
+      - application/json
+      description: API for creating a ClientType
+      parameters:
+      - description: ClientType Params To Create
+        in: body
+        name: branch
+        required: true
+        schema:
+          $ref: '#/definitions/rest.ClientType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A ClientType
+      tags:
+      - ClientType
+  /clients/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a clientType with code
+      parameters:
+      - description: ClientType's code To Delete
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A ClientType with code
+      tags:
+      - ClientType
+    get:
+      consumes:
+      - application/json
+      description: API for getting a clientType with code
+      parameters:
+      - description: code for get ClientType
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.ClientType'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A ClientType with Code
+      tags:
+      - ClientType
+    put:
+      consumes:
+      - application/json
+      description: API for updating a clientType with Code
+      parameters:
+      - description: ClientType's code To Update
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Updated ClientType Parameters
+        in: body
+        name: clientType
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateClientType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A ClientType with Code
+      tags:
+      - ClientType
+  /currencies:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info About  Just All Currencies
+      parameters:
+      - description: Search By MFO
+        in: query
+        name: mfo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.Currency'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All Currencies or Read Currency With MFO
+      tags:
+      - Currency
+    post:
+      consumes:
+      - application/json
+      description: API for creating a Currency
+      parameters:
+      - description: Currency Params To Create
+        in: body
+        name: maritial
+        required: true
+        schema:
+          $ref: '#/definitions/rest.Currency'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A Currency
+      tags:
+      - Currency
+  /currencies/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a filial with code
+      parameters:
+      - description: Currency's code To Delete
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A Currency with code
+      tags:
+      - Currency
+    get:
+      consumes:
+      - application/json
+      description: API for getting a Currency with code
+      parameters:
+      - description: code for get Currency
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.Currency'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A Currency with code
+      tags:
+      - Currency
+    put:
+      consumes:
+      - application/json
+      description: API for updating a currency with code
+      parameters:
+      - description: Currency's code To Update
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Updated Currency Parameters
+        in: body
+        name: filial
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateCurrency'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A Currency with code
+      tags:
+      - Currency
+  /districts:
+    get:
+      consumes:
+      - application/json
+      description: API to get all district
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.district'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all district
+      tags:
+      - District
+    post:
+      consumes:
+      - application/json
+      description: API to create a district
+      parameters:
+      - description: create district request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.districtParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create district
+      tags:
+      - District
+  /districts/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate district by code
+      parameters:
+      - description: district code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete district
+      tags:
+      - District
+    get:
+      consumes:
+      - application/json
+      description: API to get a district by code
+      parameters:
+      - description: district code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.district'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one district
+      tags:
+      - District
+    put:
+      consumes:
+      - application/json
+      description: API to update district by code
+      parameters:
+      - description: district code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update district request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateDistrictParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update district
+      tags:
+      - District
+  /districts/import:
+    put:
+      consumes:
+      - multipart/form-data
+      description: API to deactivate district by code
+      parameters:
+      - description: 'Excel File in format: A:CodeSOATO|B:Code|C:CodeGNI|D:CodeProvince|E:NameRu|F:NameEn|G:NameUz'
+        in: formData
+        name: excel
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create district
+      tags:
+      - District
+  /genders:
+    get:
+      consumes:
+      - application/json
+      description: API to get all gender
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.Gender'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all gender
+      tags:
+      - Gender
+    post:
+      consumes:
+      - application/json
+      description: API to create a gender
+      parameters:
+      - description: create gender request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.genderParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create gender
+      tags:
+      - Gender
+  /genders/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate gender by code
+      parameters:
+      - description: gender code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete gender
+      tags:
+      - Gender
+    get:
+      consumes:
+      - application/json
+      description: API to get a gender by code
+      parameters:
+      - description: gender code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.Gender'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one gender
+      tags:
+      - Gender
+    put:
+      consumes:
+      - application/json
+      description: API to update gender by code
+      parameters:
+      - description: gender code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update gender request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateGenderParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update gender
+      tags:
+      - Gender
+  /maritials:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info About All Maritials
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.Marital'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All Martials
+      tags:
+      - Marital
+    post:
+      consumes:
+      - application/json
+      description: API for creating a Marital
+      parameters:
+      - description: Marital Params To Create
+        in: body
+        name: maritial
+        required: true
+        schema:
+          $ref: '#/definitions/rest.Marital'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A Marital
+      tags:
+      - Marital
+  /maritials/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a maritial with code
+      parameters:
+      - description: Marital's code To Delete
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A Marital with code
+      tags:
+      - Marital
+    get:
+      consumes:
+      - application/json
+      description: API for getting a marital with Code
+      parameters:
+      - description: code for get Marital
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.Marital'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A Marital with Code
+      tags:
+      - Marital
+    put:
+      consumes:
+      - application/json
+      description: API for updating a maritial with Code
+      parameters:
+      - description: Marital's code To Update
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Updated Marital Parameters
+        in: body
+        name: maritial
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateMarital'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A Marital with Code
+      tags:
+      - Marital
+  /nationalities:
+    get:
+      consumes:
+      - application/json
+      description: API to get all nationalities
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.nationality'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all nationality
+      tags:
+      - Nationality
+    post:
+      consumes:
+      - application/json
+      description: API to create a nationality
+      parameters:
+      - description: create nationality request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.nationalityParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create nationality
+      tags:
+      - Nationality
+  /nationalities/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate nationality by code
+      parameters:
+      - description: nationality code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete nationality
+      tags:
+      - Nationality
+    get:
+      consumes:
+      - application/json
+      description: API to get a nationality by code
+      parameters:
+      - description: nationality code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.nationality'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one nationality
+      tags:
+      - Nationality
+    put:
+      consumes:
+      - application/json
+      description: API to update nationality by code
+      parameters:
+      - description: nationality code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update nationality request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateNationalityParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update nationality
+      tags:
+      - Nationality
+  /nationalities/import:
+    put:
+      consumes:
+      - multipart/form-data
+      description: API to deactivate nationality by code
+      parameters:
+      - description: 'Excel File in format: A:Code|B:NameRU|C:NameEn|D:NameUz'
+        in: formData
+        name: excel
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create nationality
+      tags:
+      - Nationality
+  /offer_version:
+    post:
+      consumes:
+      - application/json
+      description: API to create a offerversion
+      parameters:
+      - description: create offer version request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.offerVersionParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create offer version
+      tags:
+      - Offer Version
+  /offer_version/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate offer version by code
+      parameters:
+      - description: offer version code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete offer version
+      tags:
+      - Offer Version
+    get:
+      consumes:
+      - application/json
+      description: API to get a offer version by code
+      parameters:
+      - description: offer version code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.offerversion'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one offer version
+      tags:
+      - Offer Version
+    put:
+      consumes:
+      - application/json
+      description: API to update offer version by code
+      parameters:
+      - description: offer version code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update offer version request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateOfferVersionParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update offer version
+      tags:
+      - Offer Version
+  /offer_version_translation:
+    get:
+      consumes:
+      - application/json
+      description: API to get all offer version translations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.offerversiontranslation'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all offer version translations
+      tags:
+      - Offer Version Translation
+    post:
+      consumes:
+      - application/json
+      description: API to create a offer_version_translations
+      parameters:
+      - description: create offer version translations request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.offerVersionTranslationParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create offer version translation
+      tags:
+      - Offer Version Translation
+  /offer_version_translation/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate offer version translation by code
+      parameters:
+      - description: offer version translation id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete offer version translation
+      tags:
+      - Offer Version Translation
+    get:
+      consumes:
+      - application/json
+      description: API to get a offer version translation by code
+      parameters:
+      - description: offer version id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.offerversiontranslation'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one offer version translation
+      tags:
+      - Offer Version Translation
+    put:
+      consumes:
+      - application/json
+      description: API to update offer version translation by code
+      parameters:
+      - description: offer_version_id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update offer version translation request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateOfferVersionTranslationParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update offer version translation
+      tags:
+      - Offer Version Translation
+  /offer_versions:
+    get:
+      consumes:
+      - application/json
+      description: API to get all offer versions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.offerversion'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all offer versions
+      tags:
+      - Offer Version
+  /offers:
+    get:
+      consumes:
+      - application/json
+      description: API to get all offers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.offer'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all offer
+      tags:
+      - Offer
+    post:
+      consumes:
+      - application/json
+      description: API to create a offer
+      parameters:
+      - description: create offer request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.offerParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create offer
+      tags:
+      - Offer
+  /offers/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate offer by code
+      parameters:
+      - description: offer code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete offer
+      tags:
+      - Offer
+    get:
+      consumes:
+      - application/json
+      description: API to get a offer by code
+      parameters:
+      - description: offer code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.offer'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one offer
+      tags:
+      - Offer
+    put:
+      consumes:
+      - application/json
+      description: API to update offer by code
+      parameters:
+      - description: offer code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update offer request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateOfferParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update offer
+      tags:
+      - Offer
+  /processing-systems:
+    get:
+      consumes:
+      - application/json
+      description: API For Get All Info Just All ProcessingSystems
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.ProcessingSystem'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read All ProcessingSystems
+      tags:
+      - ProcessingSystem
+    post:
+      consumes:
+      - application/json
+      description: API for creating a ProcessingSystem
+      parameters:
+      - description: ProcessingSystem Params To Create
+        in: body
+        name: branch
+        required: true
+        schema:
+          $ref: '#/definitions/rest.ProcessingSystem'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create A ProcessingSystem
+      tags:
+      - ProcessingSystem
+  /processing-systems/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: API for deleting a processingSystem with id
+      parameters:
+      - description: ProcessingSystem's code To Delete
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete A ProcessingSystem with id
+      tags:
+      - ProcessingSystem
+    get:
+      consumes:
+      - application/json
+      description: API for getting a processingSystem with id
+      parameters:
+      - description: id for get ProcessingSystem
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.ProcessingSystem'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A ProcessingSystem with Id
+      tags:
+      - ProcessingSystem
+    put:
+      consumes:
+      - application/json
+      description: API for updating a processingSystem with id
+      parameters:
+      - description: ProcessingSystem's id To Update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated ProcessingSystem Parameters
+        in: body
+        name: processingSystem
+        required: true
+        schema:
+          $ref: '#/definitions/rest.ProcessingSystem'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update A ProcessingSystem with id
+      tags:
+      - ProcessingSystem
+  /processing-systems/code/{code}:
+    get:
+      consumes:
+      - application/json
+      description: API for getting a processingSystem with code
+      parameters:
+      - description: code for get ProcessingSystem
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.ProcessingSystem'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read A ProcessingSystem with Code
+      tags:
+      - ProcessingSystem
+  /regions:
+    get:
+      consumes:
+      - application/json
+      description: API to get all region
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.region'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all region
+      tags:
+      - Region
+    post:
+      consumes:
+      - application/json
+      description: API to create a region
+      parameters:
+      - description: create region request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.regionParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create region
+      tags:
+      - Region
+  /regions/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate region by code
+      parameters:
+      - description: region code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete region
+      tags:
+      - Region
+    get:
+      consumes:
+      - application/json
+      description: API to get a region by code
+      parameters:
+      - description: region code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.region'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one region
+      tags:
+      - Region
+    put:
+      consumes:
+      - application/json
+      description: API to update region by code
+      parameters:
+      - description: region code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update region request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateRegionParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update region
+      tags:
+      - Region
+  /regions/import:
+    put:
+      consumes:
+      - multipart/form-data
+      description: API to deactivate region by code
+      parameters:
+      - description: 'Excel File in format: A:Code|B:NameRU|C:NameEn|D:NameUz|E:Rank'
+        in: formData
+        name: excel
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create region
+      tags:
+      - Region
+schemes:
+- http
+swagger: "2.0"
