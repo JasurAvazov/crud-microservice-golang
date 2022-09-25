@@ -24,10 +24,10 @@ import (
 // @description Apelsin crud
 // @contact.name API Support
 // @Schemes http
-// @contact.url https://www.instagram.com/
+// @contact.url https://www.linkedin.com/in/jasur-avazov-312686235/
 // @contact.email jasuravazov4@gmail.com
 // @license.name Jasur
-// @license.url https://www.instagram.com/
+// @license.url https://www.linkedin.com/in/jasur-avazov-312686235/
 func main() {
 	quitSignal := make(chan os.Signal, 1)
 	signal.Notify(quitSignal, os.Interrupt, syscall.SIGTERM)
