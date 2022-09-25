@@ -1,6 +1,7 @@
 package main
 
 import (
+	"apelsin/api/docs"
 	"apelsin/config"
 	"apelsin/pkg/cors"
 	"apelsin/pkg/logger"
@@ -33,6 +34,10 @@ func main() {
 
 	cfg := config.Load()
 	log := logger.New(cfg.LogLevel, "dbo_some_service")
+
+	docs.SwaggerInfo.Host = cfg.HTTPHost + cfg.HTTPPort
+	docs.SwaggerInfo.BasePath = ""
+	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	log.Info("Connecting to db...")
 	db, err := sqlx.Connect("postgres", cfg.PostgresURL())

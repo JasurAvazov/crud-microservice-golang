@@ -34,3 +34,10 @@ CREATE TABLE IF NOT EXISTS nationalities (
         "activated_at" timestamp with time zone,
         "deactivated_at" timestamp with time zone
 );
+
+CREATE TABLE IF NOT EXISTS nationalities (
+        "code" varchar NOT NULL PRIMARY KEY,
+        "title" jsonb NOT NULL,
+        "activated_at" timestamp with time zone,
+        "deactivated_at" timestamp with time zone
+);
