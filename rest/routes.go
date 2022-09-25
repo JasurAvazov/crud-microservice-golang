@@ -11,10 +11,10 @@ func endpoints(r *gin.Engine, h *handler) {
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
-	r.POST("/districts", h.createDistrict)
-	r.GET("/districts", h.readAllDistricts)
-	r.GET("/districts/:code", h.readDistrict)
-	r.PUT("/districts/:code", h.updateDistrict)
-	r.DELETE("/districts/:code", h.deleteDistrict)
+	r.POST("/customer", h.createCustomer)
+	r.GET("/customers", h.readAllCustomers)
+	r.GET("/customer/:code", h.readCustomer)
+	r.PUT("/customer/:code", h.updateCustomer)
+	r.DELETE("/customer/:code", h.deleteCustomer)
 
 }

@@ -37,6 +37,9 @@ var (
 
 	// ErrorCodeRMQ - RMQ returned error
 	ErrorCodeRMQ = -60
+
+	// ErrorConvert - Convert error
+	ErrorConvert = -61
 )
 
 var (

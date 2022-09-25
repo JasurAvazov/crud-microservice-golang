@@ -5,38 +5,38 @@ import (
 	"context"
 )
 
-func (ctrl *Controller) DeleteDistrict(ctx context.Context, code string) error {
+func (ctrl *Controller) DeleteCustomer(ctx context.Context, id string) error {
 	session, ctx, err := ctrl.store.StartSession(ctx)
 	if err != nil {
 		return err
 	}
 	var sessionErr error
 	defer func() { session.Close(sessionErr) }()
-	repo := ctrl.store.District()
-	sessionErr = repo.Delete(ctx, code)
+	repo := ctrl.store.Customer()
+	sessionErr = repo.Delete(ctx, id)
 	if sessionErr != nil {
 		return sessionErr
 	}
 	return nil
 }
 
-func (ctrl *Controller) GetDistrict(ctx context.Context, code string) (models.District, error) {
-	repo := ctrl.store.District()
-	districts, err := repo.Read(ctx, code)
+func (ctrl *Controller) GetCustomer(ctx context.Context, code string) (models.Customer, error) {
+	repo := ctrl.store.Customer()
+	customers, err := repo.Read(ctx, code)
 	if err != nil {
-		return models.District{}, err
+		return models.Customer{}, err
 	}
-	return districts, nil
+	return customers, nil
 }
 
-func (ctrl *Controller) CreateDistrict(ctx context.Context, model models.District) error {
+func (ctrl *Controller) CreateCustomer(ctx context.Context, model models.Customer) error {
 	var sessionErr error
 	session, ctx, err := ctrl.store.StartSession(ctx)
 	if err != nil {
 		return err
 	}
 	defer func() { session.Close(sessionErr) }()
-	repo := ctrl.store.District()
+	repo := ctrl.store.Customer()
 
 	if _, sessionErr = repo.Create(ctx, model); sessionErr != nil {
 		return sessionErr
@@ -44,14 +44,14 @@ func (ctrl *Controller) CreateDistrict(ctx context.Context, model models.Distric
 	return nil
 }
 
-func (ctrl *Controller) UpdateDistrict(ctx context.Context, model models.District) error {
+func (ctrl *Controller) UpdateCustomer(ctx context.Context, model models.Customer) error {
 	var sessionErr error
 	session, ctx, err := ctrl.store.StartSession(ctx)
 	if err != nil {
 		return err
 	}
 	defer func() { session.Close(sessionErr) }()
-	repo := ctrl.store.District()
+	repo := ctrl.store.Customer()
 
 	if sessionErr = repo.Update(ctx, model); sessionErr != nil {
 		return sessionErr
@@ -59,11 +59,11 @@ func (ctrl *Controller) UpdateDistrict(ctx context.Context, model models.Distric
 	return nil
 }
 
-func (ctrl *Controller) ListDistrict(ctx context.Context) ([]models.District, error) {
-	repo := ctrl.store.District()
-	districts, err := repo.ReadAll(ctx)
+func (ctrl *Controller) ListCustomer(ctx context.Context) ([]models.Customer, error) {
+	repo := ctrl.store.Customer()
+	customers, err := repo.ReadAll(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return districts, nil
+	return customers, nil
 }

@@ -12,69 +12,21 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "contact": {
             "name": "API Support",
-            "url": "https://www.instagram.com/",
+            "url": "https://www.linkedin.com/in/jasur-avazov-312686235/",
             "email": "jasuravazov4@gmail.com"
         },
         "license": {
             "name": "Jasur",
-            "url": "https://www.instagram.com/"
+            "url": "https://www.linkedin.com/in/jasur-avazov-312686235/"
         },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/districts": {
-            "get": {
-                "description": "API to get all district",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "District"
-                ],
-                "summary": "Read all district",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/views.R"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/views.district"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {
-                            "$ref": "#/definitions/views.R"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/views.R"
-                        }
-                    }
-                }
-            },
+        "/customer": {
             "post": {
-                "description": "API to create a district",
+                "description": "API to create a customer",
                 "consumes": [
                     "application/json"
                 ],
@@ -82,17 +34,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "District"
+                    "Customer"
                 ],
-                "summary": "Create district",
+                "summary": "Create customer",
                 "parameters": [
                     {
-                        "description": "create district request parameters",
+                        "description": "create customer request parameters",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/rest.districtParams"
+                            "$ref": "#/definitions/rest.customerParams"
                         }
                     }
                 ],
@@ -118,9 +70,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/districts/{code}": {
+        "/customer/{code}": {
             "get": {
-                "description": "API to get a district by code",
+                "description": "API to get a customer by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -128,13 +80,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "District"
+                    "Customer"
                 ],
-                "summary": "Read one district",
+                "summary": "Read one customer",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "district code",
+                        "description": "customer id",
                         "name": "code",
                         "in": "path",
                         "required": true
@@ -152,7 +104,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/views.district"
+                                            "$ref": "#/definitions/views.customer"
                                         }
                                     }
                                 }
@@ -174,7 +126,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "API to update district by code",
+                "description": "API to update customer by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -182,24 +134,24 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "District"
+                    "Customer"
                 ],
-                "summary": "Update district",
+                "summary": "Update customer",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "district code",
+                        "description": "customer id",
                         "name": "code",
                         "in": "path",
                         "required": true
                     },
                     {
-                        "description": "update district request parameters",
+                        "description": "update customer request parameters",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/rest.updateDistrictParams"
+                            "$ref": "#/definitions/rest.updateCustomerParams"
                         }
                     }
                 ],
@@ -225,7 +177,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "API to deactivate district by code",
+                "description": "API to deactivate customer by id",
                 "consumes": [
                     "application/json"
                 ],
@@ -233,13 +185,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "District"
+                    "Customer"
                 ],
-                "summary": "Delete district",
+                "summary": "Delete customer",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "district code",
+                        "description": "customer id",
                         "name": "code",
                         "in": "path",
                         "required": true
@@ -266,91 +218,105 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/customers": {
+            "get": {
+                "description": "API to get all customers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Read all customers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/views.R"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/views.customer"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "rest.Languages": {
-            "type": "object",
-            "properties": {
-                "en": {
-                    "type": "string"
-                },
-                "ru": {
-                    "type": "string"
-                },
-                "uz": {
-                    "type": "string"
-                }
-            }
-        },
-        "rest.districtParams": {
+        "rest.customerParams": {
             "type": "object",
             "required": [
-                "code",
-                "code_gni",
-                "code_province",
-                "code_soato",
-                "is_active",
-                "title"
+                "address",
+                "country",
+                "id",
+                "name",
+                "phone"
             ],
             "properties": {
-                "code": {
+                "address": {
                     "type": "string"
                 },
-                "code_gni": {
+                "country": {
                     "type": "string"
                 },
-                "code_province": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
                 },
-                "code_soato": {
+                "phone": {
                     "type": "string"
-                },
-                "is_active": {
-                    "type": "boolean"
-                },
-                "title": {
-                    "$ref": "#/definitions/rest.Languages"
                 }
             }
         },
-        "rest.updateDistrictParams": {
+        "rest.updateCustomerParams": {
             "type": "object",
             "required": [
-                "code_gni",
-                "code_province",
-                "code_soato",
-                "is_active",
-                "title"
+                "address",
+                "country",
+                "name",
+                "phone"
             ],
             "properties": {
-                "code_gni": {
+                "address": {
                     "type": "string"
                 },
-                "code_province": {
+                "country": {
                     "type": "string"
                 },
-                "code_soato": {
+                "name": {
                     "type": "string"
                 },
-                "is_active": {
-                    "type": "boolean"
-                },
-                "title": {
-                    "$ref": "#/definitions/rest.Languages"
-                }
-            }
-        },
-        "views.Languages": {
-            "type": "object",
-            "properties": {
-                "en": {
-                    "type": "string"
-                },
-                "ru": {
-                    "type": "string"
-                },
-                "uz": {
+                "phone": {
                     "type": "string"
                 }
             }
@@ -370,26 +336,23 @@ const docTemplate = `{
                 }
             }
         },
-        "views.district": {
+        "views.customer": {
             "type": "object",
             "properties": {
-                "code": {
+                "address": {
                     "type": "string"
                 },
-                "code_gni": {
+                "country": {
                     "type": "string"
                 },
-                "code_province": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
                 },
-                "code_soato": {
+                "phone": {
                     "type": "string"
-                },
-                "is_active": {
-                    "type": "boolean"
-                },
-                "title": {
-                    "$ref": "#/definitions/views.Languages"
                 }
             }
         }

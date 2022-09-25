@@ -2,46 +2,34 @@ package sqlstorage
 
 import (
 	"apelsin/models"
-	"database/sql"
-	"encoding/json"
 )
 
-type dbDistrict struct {
-	Code          string          `db:"code"`
-	SOATO         string          `db:"soato_code"`
-	CodeGNI       string          `db:"gni_code"`
-	CodeProvince  string          `db:"province_code"`
-	Title         json.RawMessage `db:"title"`
-	ActivatedAt   sql.NullTime    `db:"activated_at"`
-	DeactivatedAt sql.NullTime    `db:"deactivated_at"`
-	State         bool            `db:"state"`
+type dbCustomer struct {
+	Id      int    `db:"id"`
+	Name    string `db:"name"`
+	Country string `db:"country"`
+	Address string `db:"address"`
+	Phone   string `db:"phone"`
 }
 
-func (dd dbDistrict) toModel() models.District {
-	m := models.District{
-		CodeSOATO:    dd.SOATO,
-		Code:         dd.Code,
-		CodeGNI:      dd.CodeGNI,
-		CodeProvince: dd.CodeProvince,
-		Title:        models.Languages{},
-		State:        dd.State,
+func (dd dbCustomer) toModel() models.Customer {
+	m := models.Customer{
+		Id:      dd.Id,
+		Name:    dd.Name,
+		Country: dd.Country,
+		Address: dd.Address,
+		Phone:   dd.Phone,
 	}
-	_ = json.Unmarshal(dd.Title, &m.Title)
 	return m
 }
 
-func newDbDistrict(d models.District) dbDistrict {
-	rawJson, _ := json.Marshal(d.Title)
-	dd := dbDistrict{
-		SOATO:        d.CodeSOATO,
-		Code:         d.Code,
-		CodeGNI:      d.CodeGNI,
-		CodeProvince: d.CodeProvince,
-		Title:        rawJson,
-		ActivatedAt: sql.NullTime{
-			Valid: d.ActivatedAt != nil,
-			Time:  *d.ActivatedAt},
-		State: d.State,
+func newDbCustomer(m models.Customer) dbCustomer {
+	dd := dbCustomer{
+		Id:      m.Id,
+		Name:    m.Name,
+		Country: m.Country,
+		Address: m.Address,
+		Phone:   m.Phone,
 	}
 	return dd
 }

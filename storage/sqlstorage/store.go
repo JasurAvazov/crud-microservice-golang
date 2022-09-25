@@ -10,15 +10,15 @@ import (
 type Store struct {
 	db       *sqlx.DB
 	log      logger.Logger
-	district *districtRepo
+	customer *customerRepo
 }
 
-func (s *Store) District() storage.DistrictRepository {
-	if s.district == nil {
-		s.district = &districtRepo{s}
+func (s *Store) Customer() storage.CustomerRepository {
+	if s.customer == nil {
+		s.customer = &customerRepo{s}
 	}
 
-	return s.district
+	return s.customer
 }
 
 func New(db *sqlx.DB, log logger.Logger) *Store {

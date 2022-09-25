@@ -33,7 +33,7 @@ func main() {
 	signal.Notify(quitSignal, os.Interrupt, syscall.SIGTERM)
 
 	cfg := config.Load()
-	log := logger.New(cfg.LogLevel, "dbo_some_service")
+	log := logger.New(cfg.LogLevel, "postgres")
 
 	docs.SwaggerInfo.Host = cfg.HTTPHost + cfg.HTTPPort
 	docs.SwaggerInfo.BasePath = ""

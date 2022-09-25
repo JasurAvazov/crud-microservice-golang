@@ -1,62 +1,38 @@
 definitions:
-  rest.Languages:
+  rest.customerParams:
     properties:
-      en:
+      address:
         type: string
-      ru:
+      country:
         type: string
-      uz:
+      id:
+        type: integer
+      name:
         type: string
-    type: object
-  rest.districtParams:
-    properties:
-      code:
+      phone:
         type: string
-      code_gni:
-        type: string
-      code_province:
-        type: string
-      code_soato:
-        type: string
-      is_active:
-        type: boolean
-      title:
-        $ref: '#/definitions/rest.Languages'
     required:
-    - code
-    - code_gni
-    - code_province
-    - code_soato
-    - is_active
-    - title
+    - address
+    - country
+    - id
+    - name
+    - phone
     type: object
-  rest.updateDistrictParams:
+  rest.updateCustomerParams:
     properties:
-      code_gni:
+      address:
         type: string
-      code_province:
+      country:
         type: string
-      code_soato:
+      name:
         type: string
-      is_active:
-        type: boolean
-      title:
-        $ref: '#/definitions/rest.Languages'
+      phone:
+        type: string
     required:
-    - code_gni
-    - code_province
-    - code_soato
-    - is_active
-    - title
-    type: object
-  views.Languages:
-    properties:
-      en:
-        type: string
-      ru:
-        type: string
-      uz:
-        type: string
+    - address
+    - country
+    - name
+    - phone
     type: object
   views.R:
     properties:
@@ -68,37 +44,161 @@ definitions:
       status:
         type: string
     type: object
-  views.district:
+  views.customer:
     properties:
-      code:
+      address:
         type: string
-      code_gni:
+      country:
         type: string
-      code_province:
+      id:
+        type: integer
+      name:
         type: string
-      code_soato:
+      phone:
         type: string
-      is_active:
-        type: boolean
-      title:
-        $ref: '#/definitions/views.Languages'
     type: object
 info:
   contact:
     email: jasuravazov4@gmail.com
     name: API Support
-    url: https://www.instagram.com/
+    url: https://www.linkedin.com/in/jasur-avazov-312686235/
   description: Apelsin crud
   license:
     name: Jasur
-    url: https://www.instagram.com/
+    url: https://www.linkedin.com/in/jasur-avazov-312686235/
   title: Apelsin
 paths:
-  /districts:
+  /customer:
+    post:
+      consumes:
+      - application/json
+      description: API to create a customer
+      parameters:
+      - description: create customer request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.customerParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create customer
+      tags:
+      - Customer
+  /customer/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate customer by id
+      parameters:
+      - description: customer id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete customer
+      tags:
+      - Customer
     get:
       consumes:
       - application/json
-      description: API to get all district
+      description: API to get a customer by id
+      parameters:
+      - description: customer id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.customer'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one customer
+      tags:
+      - Customer
+    put:
+      consumes:
+      - application/json
+      description: API to update customer by id
+      parameters:
+      - description: customer id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update customer request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateCustomerParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update customer
+      tags:
+      - Customer
+  /customers:
+    get:
+      consumes:
+      - application/json
+      description: API to get all customers
       produces:
       - application/json
       responses:
@@ -110,7 +210,7 @@ paths:
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/views.district'
+                    $ref: '#/definitions/views.customer'
                   type: array
               type: object
         "422":
@@ -121,134 +221,9 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/views.R'
-      summary: Read all district
+      summary: Read all customers
       tags:
-      - District
-    post:
-      consumes:
-      - application/json
-      description: API to create a district
-      parameters:
-      - description: create district request parameters
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/rest.districtParams'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/views.R'
-        "422":
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/views.R'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/views.R'
-      summary: Create district
-      tags:
-      - District
-  /districts/{code}:
-    delete:
-      consumes:
-      - application/json
-      description: API to deactivate district by code
-      parameters:
-      - description: district code
-        in: path
-        name: code
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/views.R'
-        "422":
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/views.R'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/views.R'
-      summary: Delete district
-      tags:
-      - District
-    get:
-      consumes:
-      - application/json
-      description: API to get a district by code
-      parameters:
-      - description: district code
-        in: path
-        name: code
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/views.R'
-            - properties:
-                data:
-                  $ref: '#/definitions/views.district'
-              type: object
-        "422":
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/views.R'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/views.R'
-      summary: Read one district
-      tags:
-      - District
-    put:
-      consumes:
-      - application/json
-      description: API to update district by code
-      parameters:
-      - description: district code
-        in: path
-        name: code
-        required: true
-        type: string
-      - description: update district request parameters
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/rest.updateDistrictParams'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/views.R'
-        "422":
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/views.R'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/views.R'
-      summary: Update district
-      tags:
-      - District
+      - Customer
 schemes:
 - http
 swagger: "2.0"
