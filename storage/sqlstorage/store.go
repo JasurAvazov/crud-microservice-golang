@@ -8,9 +8,11 @@ import (
 )
 
 type Store struct {
-	db       *sqlx.DB
-	log      logger.Logger
+	db  *sqlx.DB
+	log logger.Logger
+
 	customer *customerRepo
+	order    *orderRepo
 }
 
 func (s *Store) Customer() storage.CustomerRepository {
@@ -19,6 +21,14 @@ func (s *Store) Customer() storage.CustomerRepository {
 	}
 
 	return s.customer
+}
+
+func (s *Store) Order() storage.OrderRepository {
+	if s.order == nil {
+		s.order = &orderRepo{s}
+	}
+
+	return s.order
 }
 
 func New(db *sqlx.DB, log logger.Logger) *Store {

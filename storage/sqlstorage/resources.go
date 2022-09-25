@@ -2,6 +2,7 @@ package sqlstorage
 
 import (
 	"apelsin/models"
+	"time"
 )
 
 type dbCustomer struct {
@@ -30,6 +31,30 @@ func newDbCustomer(m models.Customer) dbCustomer {
 		Country: m.Country,
 		Address: m.Address,
 		Phone:   m.Phone,
+	}
+	return dd
+}
+
+type dbOrder struct {
+	Id      int       `db:"id"`
+	Date    time.Time `db:"date"`
+	Cust_id int       `db:"cust_id"`
+}
+
+func (dd dbOrder) toModel() models.Order {
+	m := models.Order{
+		Id:      dd.Id,
+		Date:    dd.Date,
+		Cust_id: dd.Cust_id,
+	}
+	return m
+}
+
+func newDbOrder(m models.Order) dbOrder {
+	dd := dbOrder{
+		Id:      m.Id,
+		Date:    m.Date,
+		Cust_id: m.Cust_id,
 	}
 	return dd
 }

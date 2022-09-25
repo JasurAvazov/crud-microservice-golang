@@ -18,6 +18,19 @@ definitions:
     - name
     - phone
     type: object
+  rest.orderParams:
+    properties:
+      cust_id:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
+    required:
+    - cust_id
+    - date
+    - id
+    type: object
   rest.updateCustomerParams:
     properties:
       address:
@@ -33,6 +46,16 @@ definitions:
     - country
     - name
     - phone
+    type: object
+  rest.updateOrderParams:
+    properties:
+      cust_id:
+        type: integer
+      date:
+        type: string
+    required:
+    - cust_id
+    - date
     type: object
   views.R:
     properties:
@@ -56,6 +79,15 @@ definitions:
         type: string
       phone:
         type: string
+    type: object
+  views.order:
+    properties:
+      cust_id:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
     type: object
 info:
   contact:
@@ -224,6 +256,162 @@ paths:
       summary: Read all customers
       tags:
       - Customer
+  /order:
+    post:
+      consumes:
+      - application/json
+      description: API to create a order
+      parameters:
+      - description: create order request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.orderParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create order
+      tags:
+      - Order
+  /order/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate order by id
+      parameters:
+      - description: order id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete order
+      tags:
+      - Order
+    get:
+      consumes:
+      - application/json
+      description: API to get a order by id
+      parameters:
+      - description: order id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.order'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one order
+      tags:
+      - Order
+    put:
+      consumes:
+      - application/json
+      description: API to update order by id
+      parameters:
+      - description: order id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update order request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateOrderParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update order
+      tags:
+      - Order
+  /orders:
+    get:
+      consumes:
+      - application/json
+      description: API to get all orders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.order'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all orders
+      tags:
+      - Order
 schemes:
 - http
 swagger: "2.0"
