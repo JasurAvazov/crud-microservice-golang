@@ -201,33 +201,3 @@ func (h *handler) deleteDistrict(c *gin.Context) {
 		h.handleErrorResponse(c, http.StatusInternalServerError, status.ErrorCodeDB, err)
 	}
 }
-
-// importDistricts godoc swagger
-// @Summary Create district
-// @Description API to deactivate district by code
-// @Router /districts/import [PUT]
-// @Tags District
-// @Accept multipart/form-data
-// @Produce json
-// @Param excel formData file true "Excel File in format: A:CodeSOATO|B:Code|C:CodeGNI|D:CodeProvince|E:NameRu|F:NameEn|G:NameUz"
-// @Success 200 {object} views.R
-// @Failure 422 {object} views.R
-// @Failure 500 {object} views.R
-func (h *handler) importDistricts(c *gin.Context) {
-	file, err := c.FormFile("excel")
-	if err != nil {
-		h.handleErrorResponse(c, http.StatusUnprocessableEntity, status.ErrorCodeValidation, err)
-		return
-	}
-	f, err := file.Open()
-	if err != nil {
-		h.handleErrorResponse(c, http.StatusUnprocessableEntity, status.ErrorCodeValidation, err)
-		return
-	}
-	d, err := h.ctrl.ImportDistrictsToDB(c, f)
-	if err != nil {
-		h.handleErrorResponse(c, http.StatusUnprocessableEntity, status.ErrorCodeValidation, err)
-		return
-	}
-	h.handleSuccessResponse(c, views.Districts(d))
-}
