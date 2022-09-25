@@ -14,3 +14,9 @@ CREATE TABLE IF NOT EXISTS "order" (
         PRIMARY KEY (id),
         FOREIGN KEY (cust_id) REFERENCES customer(id)
 );
+
+CREATE TABLE IF NOT EXISTS category (
+        "id" int NOT NULL,
+        "name" varchar(250),
+        PRIMARY KEY (id),
+);

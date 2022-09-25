@@ -58,3 +58,24 @@ func newDbOrder(m models.Order) dbOrder {
 	}
 	return dd
 }
+
+type dbCategory struct {
+	Id   int    `db:"id"`
+	Name string `db:"name"`
+}
+
+func (dd dbCategory) toModel() models.Category {
+	m := models.Category{
+		Id:   dd.Id,
+		Name: dd.Name,
+	}
+	return m
+}
+
+func newDbCategory(m models.Category) dbCategory {
+	dd := dbCategory{
+		Id:   m.Id,
+		Name: m.Name,
+	}
+	return dd
+}

@@ -13,6 +13,7 @@ type Store struct {
 
 	customer *customerRepo
 	order    *orderRepo
+	category *categoryRepo
 }
 
 func (s *Store) Customer() storage.CustomerRepository {
@@ -29,6 +30,14 @@ func (s *Store) Order() storage.OrderRepository {
 	}
 
 	return s.order
+}
+
+func (s *Store) Category() storage.CategoryRepository {
+	if s.category == nil {
+		s.category = &categoryRepo{s}
+	}
+
+	return s.category
 }
 
 func New(db *sqlx.DB, log logger.Logger) *Store {

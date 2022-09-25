@@ -1,2 +1,3 @@
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS "order";
+DROP TABLE IF EXISTS category;
