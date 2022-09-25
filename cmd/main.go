@@ -1,7 +1,6 @@
 package main
 
 import (
-	"apelsin/api/docs"
 	"apelsin/config"
 	"apelsin/pkg/cors"
 	"apelsin/pkg/logger"
@@ -29,20 +28,12 @@ import (
 // @license.name Jasur
 // @license.url https://www.instagram.com/
 func main() {
-	// Catch Ctrl^C for graceful shutdown
 	quitSignal := make(chan os.Signal, 1)
-	signal.Notify(quitSignal, os.Interrupt, syscall.SIGTERM) // Non-blocking
+	signal.Notify(quitSignal, os.Interrupt, syscall.SIGTERM)
 
-	// *** Load config and logger
 	cfg := config.Load()
 	log := logger.New(cfg.LogLevel, "dbo_some_service")
 
-	// Set Host for swagger. In case we need to add swagger to WSO2API Manager
-	docs.SwaggerInfo.Host = cfg.HTTPHost + cfg.HTTPPort
-	docs.SwaggerInfo.BasePath = ""
-	docs.SwaggerInfo.Schemes = []string{"http"}
-
-	// *** Storage Initialization
 	log.Info("Connecting to db...")
 	db, err := sqlx.Connect("postgres", cfg.PostgresURL())
 	if err != nil {
@@ -51,12 +42,10 @@ func main() {
 	storage := sqlstorage.New(db, log)
 	log.Info("Connected to db...")
 
-	// *** Router Initialization
 	r := gin.New()
 	r.Use(cors.CORSMiddleware())
 	r.Use(gin.Logger(), gin.Recovery())
 
-	// *** REST Initialization
 	handler := rest.NewAPI(cfg, log, r, storage)
 
 	srv := &http.Server{
@@ -70,10 +59,8 @@ func main() {
 	}()
 	log.Info("REST Server started at port" + cfg.HTTPPort)
 
-	// Wait for Ctrl^C
 	OSCall := <-quitSignal
 
-	// Graceful HTTP server shutdown context
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	log.Info(fmt.Sprintf("\nSystem Call:%+v", OSCall))
