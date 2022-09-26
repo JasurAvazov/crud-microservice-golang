@@ -18,5 +18,16 @@ CREATE TABLE IF NOT EXISTS "order" (
 CREATE TABLE IF NOT EXISTS category (
         "id" int NOT NULL,
         "name" varchar(250),
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS product (
+        "id" int NOT NULL,
+        "name" varchar(10),
+        "category_id" int NOT NULL,
+        "description" varchar(20),
+        "price" numeric(6,2),
+        "photo" varchar(1024),
         PRIMARY KEY (id),
+        FOREIGN KEY (category_id) REFERENCES category(id)
 );

@@ -1,4 +1,14 @@
 definitions:
+  rest.categoryParams:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
   rest.customerParams:
     properties:
       address:
@@ -31,6 +41,35 @@ definitions:
     - date
     - id
     type: object
+  rest.productParams:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      photo:
+        type: string
+      price:
+        type: number
+    required:
+    - category_id
+    - description
+    - id
+    - name
+    - photo
+    - price
+    type: object
+  rest.updateCategoryParams:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
   rest.updateCustomerParams:
     properties:
       address:
@@ -57,6 +96,25 @@ definitions:
     - cust_id
     - date
     type: object
+  rest.updateProductParams:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      photo:
+        type: string
+      price:
+        type: number
+    required:
+    - category_id
+    - description
+    - name
+    - photo
+    - price
+    type: object
   views.R:
     properties:
       data: {}
@@ -65,6 +123,13 @@ definitions:
       error_note:
         type: string
       status:
+        type: string
+    type: object
+  views.category:
+    properties:
+      id:
+        type: integer
+      name:
         type: string
     type: object
   views.customer:
@@ -89,6 +154,21 @@ definitions:
       id:
         type: integer
     type: object
+  views.product:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      photo:
+        type: string
+      price:
+        type: number
+    type: object
 info:
   contact:
     email: jasuravazov4@gmail.com
@@ -100,6 +180,162 @@ info:
     url: https://www.linkedin.com/in/jasur-avazov-312686235/
   title: Apelsin
 paths:
+  /categories:
+    get:
+      consumes:
+      - application/json
+      description: API to get all categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.category'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all categories
+      tags:
+      - Category
+  /category:
+    post:
+      consumes:
+      - application/json
+      description: API to create a category
+      parameters:
+      - description: create category request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.categoryParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create category
+      tags:
+      - Category
+  /category/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate category by id
+      parameters:
+      - description: category id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete category
+      tags:
+      - Category
+    get:
+      consumes:
+      - application/json
+      description: API to get a category by id
+      parameters:
+      - description: category id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.category'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one category
+      tags:
+      - Category
+    put:
+      consumes:
+      - application/json
+      description: API to update category by id
+      parameters:
+      - description: category id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update category request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateCategoryParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update category
+      tags:
+      - Category
   /customer:
     post:
       consumes:
@@ -412,6 +648,162 @@ paths:
       summary: Read all orders
       tags:
       - Order
+  /product:
+    post:
+      consumes:
+      - application/json
+      description: API to create a product
+      parameters:
+      - description: create product request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.productParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create product
+      tags:
+      - Product
+  /product/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate product by id
+      parameters:
+      - description: product id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: API to get a product by id
+      parameters:
+      - description: product id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.product'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one product
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: API to update product by id
+      parameters:
+      - description: product id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update product request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateProductParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update product
+      tags:
+      - Product
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: API to get all products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.product'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all products
+      tags:
+      - Product
 schemes:
 - http
 swagger: "2.0"

@@ -13,6 +13,7 @@ type Storage interface {
 	Customer() CustomerRepository
 	Order() OrderRepository
 	Category() CategoryRepository
+	Product() ProductRepository
 }
 
 type RecordRetriever interface {
@@ -48,6 +49,17 @@ type CategoryRepository interface {
 	Read(context.Context, string) (models.Category, error)
 	ReadAll(context.Context) ([]models.Category, error)
 	Update(context.Context, models.Category) error
+	Delete(context.Context, string) error
+	ClearAll(ctx context.Context) error
+}
+
+// ProductRepository ...
+type ProductRepository interface {
+	RecordRetriever
+	Create(context.Context, models.Product) (models.Product, error)
+	Read(context.Context, string) (models.Product, error)
+	ReadAll(context.Context) ([]models.Product, error)
+	Update(context.Context, models.Product) error
 	Delete(context.Context, string) error
 	ClearAll(ctx context.Context) error
 }

@@ -79,3 +79,36 @@ func newDbCategory(m models.Category) dbCategory {
 	}
 	return dd
 }
+
+type dbProduct struct {
+	Id          int     `db:"id"`
+	Name        string  `db:"name"`
+	CategoryId  int     `db:"category_id"`
+	Description string  `db:"description"`
+	Price       float64 `db:"price"`
+	Photo       string  `db:"photo"`
+}
+
+func (dd dbProduct) toModel() models.Product {
+	m := models.Product{
+		Id:          dd.Id,
+		Name:        dd.Name,
+		CategoryId:  dd.CategoryId,
+		Description: dd.Description,
+		Price:       dd.Price,
+		Photo:       dd.Photo,
+	}
+	return m
+}
+
+func newDbProduct(m models.Product) dbProduct {
+	dd := dbProduct{
+		Id:          m.Id,
+		Name:        m.Name,
+		CategoryId:  m.CategoryId,
+		Description: m.Description,
+		Price:       m.Price,
+		Photo:       m.Photo,
+	}
+	return dd
+}
