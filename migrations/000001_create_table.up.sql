@@ -31,3 +31,13 @@ CREATE TABLE IF NOT EXISTS product (
         PRIMARY KEY (id),
         FOREIGN KEY (category_id) REFERENCES category(id)
 );
+
+CREATE TABLE IF NOT EXISTS detail (
+        "id" int NOT NULL,
+        "ord_id" int NOT NULL,
+        "pr_id" int NOT NULL,
+        "quantity" int NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (ord_id) REFERENCES "order"(id),
+        FOREIGN KEY (pr_id) REFERENCES  product(id)
+);

@@ -112,3 +112,30 @@ func newDbProduct(m models.Product) dbProduct {
 	}
 	return dd
 }
+
+type dbDetail struct {
+	Id       int   `db:"id"`
+	OrdId    int   `db:"ord_id"`
+	PrId     int   `db:"pr_id"`
+	Quantity int16 `db:"quantity"`
+}
+
+func (dd dbDetail) toModel() models.Detail {
+	m := models.Detail{
+		Id:       dd.Id,
+		OrdId:    dd.OrdId,
+		PrId:     dd.PrId,
+		Quantity: dd.Quantity,
+	}
+	return m
+}
+
+func newDbDetail(m models.Detail) dbDetail {
+	dd := dbDetail{
+		Id:       m.Id,
+		OrdId:    m.OrdId,
+		PrId:     m.PrId,
+		Quantity: m.Quantity,
+	}
+	return dd
+}

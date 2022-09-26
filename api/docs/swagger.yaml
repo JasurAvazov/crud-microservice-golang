@@ -28,6 +28,22 @@ definitions:
     - name
     - phone
     type: object
+  rest.detailParams:
+    properties:
+      id:
+        type: integer
+      ord_id:
+        type: integer
+      pr_id:
+        type: integer
+      quantity:
+        type: integer
+    required:
+    - id
+    - ord_id
+    - pr_id
+    - quantity
+    type: object
   rest.orderParams:
     properties:
       cust_id:
@@ -85,6 +101,19 @@ definitions:
     - country
     - name
     - phone
+    type: object
+  rest.updateDetailParams:
+    properties:
+      ord_id:
+        type: integer
+      pr_id:
+        type: integer
+      quantity:
+        type: integer
+    required:
+    - ord_id
+    - pr_id
+    - quantity
     type: object
   rest.updateOrderParams:
     properties:
@@ -144,6 +173,17 @@ definitions:
         type: string
       phone:
         type: string
+    type: object
+  views.detail:
+    properties:
+      id:
+        type: integer
+      ord_id:
+        type: integer
+      pr_id:
+        type: integer
+      quantity:
+        type: integer
     type: object
   views.order:
     properties:
@@ -492,6 +532,162 @@ paths:
       summary: Read all customers
       tags:
       - Customer
+  /detail:
+    post:
+      consumes:
+      - application/json
+      description: API to create a detail
+      parameters:
+      - description: create detail request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.detailParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create detail
+      tags:
+      - Detail
+  /detail/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate detail by id
+      parameters:
+      - description: detail id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete detail
+      tags:
+      - Detail
+    get:
+      consumes:
+      - application/json
+      description: API to get a detail by id
+      parameters:
+      - description: detail id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.detail'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one detail
+      tags:
+      - Detail
+    put:
+      consumes:
+      - application/json
+      description: API to update detail by id
+      parameters:
+      - description: detail id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update detail request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateDetailParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update detail
+      tags:
+      - Detail
+  /details:
+    get:
+      consumes:
+      - application/json
+      description: API to get all details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.detail'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all details
+      tags:
+      - Detail
   /order:
     post:
       consumes:
