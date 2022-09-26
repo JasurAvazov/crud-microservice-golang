@@ -759,6 +759,251 @@ const docTemplate = `{
                 }
             }
         },
+        "/invoice": {
+            "post": {
+                "description": "API to create an invoice",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Create invoice",
+                "parameters": [
+                    {
+                        "description": "create invoice request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/rest.invoiceParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            }
+        },
+        "/invoice/{code}": {
+            "get": {
+                "description": "API to get a invoice by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Read one invoice",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "invoice id",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/views.R"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/views.invoice"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "API to update invoice by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Update invoice",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "invoice id",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update invoice request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/rest.updateInvoiceParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "API to deactivate invoice by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Delete invoice",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "invoice id",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            }
+        },
+        "/invoices": {
+            "get": {
+                "description": "API to get all invoices",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Invoice"
+                ],
+                "summary": "Read all invoices",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/views.R"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/views.invoice"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.R"
+                        }
+                    }
+                }
+            }
+        },
         "/order": {
             "post": {
                 "description": "API to create a order",
@@ -1316,6 +1561,33 @@ const docTemplate = `{
                 }
             }
         },
+        "rest.invoiceParams": {
+            "type": "object",
+            "required": [
+                "amount",
+                "due",
+                "id",
+                "issued",
+                "ord_id"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "due": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "issued": {
+                    "type": "string"
+                },
+                "ord_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "rest.orderParams": {
             "type": "object",
             "required": [
@@ -1415,6 +1687,29 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
+        "rest.updateInvoiceParams": {
+            "type": "object",
+            "required": [
+                "amount",
+                "due",
+                "issued",
+                "ord_id"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "due": {
+                    "type": "string"
+                },
+                "issued": {
+                    "type": "string"
+                },
+                "ord_id": {
                     "type": "integer"
                 }
             }
@@ -1520,6 +1815,26 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
+        "views.invoice": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "due": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "issued": {
+                    "type": "string"
+                },
+                "ord_id": {
                     "type": "integer"
                 }
             }

@@ -41,3 +41,13 @@ CREATE TABLE IF NOT EXISTS detail (
         FOREIGN KEY (ord_id) REFERENCES "order"(id),
         FOREIGN KEY (pr_id) REFERENCES  product(id)
 );
+
+CREATE TABLE IF NOT EXISTS invoice (
+        "id" int NOT NULL,
+        "ord_id" int NOT NULL,
+        "amount" numeric(8,2) NOT NULL,
+        "issued" date NOT NULL,
+        "due" date NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (ord_id) REFERENCES "order"(id)
+);

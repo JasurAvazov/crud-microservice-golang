@@ -41,4 +41,10 @@ func endpoints(r *gin.Engine, h *handler) {
 	r.PUT("/detail/:code", h.updateDetail)
 	r.DELETE("/detail/:code", h.deleteDetail)
 
+	r.POST("/invoice", h.createInvoice)
+	r.GET("/invoices", h.readAllInvoices)
+	r.GET("/invoice/:code", h.readInvoice)
+	r.PUT("/invoice/:code", h.updateInvoice)
+	r.DELETE("/invoice/:code", h.deleteInvoice)
+
 }

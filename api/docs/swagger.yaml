@@ -44,6 +44,25 @@ definitions:
     - pr_id
     - quantity
     type: object
+  rest.invoiceParams:
+    properties:
+      amount:
+        type: number
+      due:
+        type: string
+      id:
+        type: integer
+      issued:
+        type: string
+      ord_id:
+        type: integer
+    required:
+    - amount
+    - due
+    - id
+    - issued
+    - ord_id
+    type: object
   rest.orderParams:
     properties:
       cust_id:
@@ -115,6 +134,22 @@ definitions:
     - pr_id
     - quantity
     type: object
+  rest.updateInvoiceParams:
+    properties:
+      amount:
+        type: number
+      due:
+        type: string
+      issued:
+        type: string
+      ord_id:
+        type: integer
+    required:
+    - amount
+    - due
+    - issued
+    - ord_id
+    type: object
   rest.updateOrderParams:
     properties:
       cust_id:
@@ -183,6 +218,19 @@ definitions:
       pr_id:
         type: integer
       quantity:
+        type: integer
+    type: object
+  views.invoice:
+    properties:
+      amount:
+        type: number
+      due:
+        type: string
+      id:
+        type: integer
+      issued:
+        type: string
+      ord_id:
         type: integer
     type: object
   views.order:
@@ -688,6 +736,162 @@ paths:
       summary: Read all details
       tags:
       - Detail
+  /invoice:
+    post:
+      consumes:
+      - application/json
+      description: API to create an invoice
+      parameters:
+      - description: create invoice request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.invoiceParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create invoice
+      tags:
+      - Invoice
+  /invoice/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate invoice by id
+      parameters:
+      - description: invoice id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete invoice
+      tags:
+      - Invoice
+    get:
+      consumes:
+      - application/json
+      description: API to get a invoice by id
+      parameters:
+      - description: invoice id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.invoice'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one invoice
+      tags:
+      - Invoice
+    put:
+      consumes:
+      - application/json
+      description: API to update invoice by id
+      parameters:
+      - description: invoice id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update invoice request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updateInvoiceParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update invoice
+      tags:
+      - Invoice
+  /invoices:
+    get:
+      consumes:
+      - application/json
+      description: API to get all invoices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.invoice'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all invoices
+      tags:
+      - Invoice
   /order:
     post:
       consumes:

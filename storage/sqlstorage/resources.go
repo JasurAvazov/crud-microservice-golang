@@ -139,3 +139,33 @@ func newDbDetail(m models.Detail) dbDetail {
 	}
 	return dd
 }
+
+type dbInvoice struct {
+	Id     int       `db:"id"`
+	OrdId  int       `db:"ord_id"`
+	Amount float64   `db:"amount"`
+	Issued time.Time `db:"issued"`
+	Due    time.Time `db:"due"`
+}
+
+func (dd dbInvoice) toModel() models.Invoice {
+	m := models.Invoice{
+		Id:     dd.Id,
+		OrdId:  dd.OrdId,
+		Amount: dd.Amount,
+		Issued: dd.Issued,
+		Due:    dd.Due,
+	}
+	return m
+}
+
+func newDbInvoice(m models.Invoice) dbInvoice {
+	dd := dbInvoice{
+		Id:     m.Id,
+		OrdId:  m.OrdId,
+		Amount: m.Amount,
+		Issued: m.Issued,
+		Due:    m.Due,
+	}
+	return dd
+}
