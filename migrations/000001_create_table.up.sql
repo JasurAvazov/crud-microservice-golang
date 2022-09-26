@@ -51,3 +51,12 @@ CREATE TABLE IF NOT EXISTS invoice (
         PRIMARY KEY (id),
         FOREIGN KEY (ord_id) REFERENCES "order"(id)
 );
+
+CREATE TABLE IF NOT EXISTS payment (
+        "id" int NOT NULL,
+        "time" timestamp with time zone NOT NULL,
+        "amount" numeric(8,2) NOT NULL,
+        "inv_id" int NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (inv_id) REFERENCES invoice(id)
+);

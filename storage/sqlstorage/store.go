@@ -17,6 +17,7 @@ type Store struct {
 	product  *productRepo
 	detail   *detailRepo
 	invoice  *invoiceRepo
+	payment  *paymentRepo
 }
 
 func (s *Store) Customer() storage.CustomerRepository {
@@ -65,6 +66,14 @@ func (s *Store) Invoice() storage.InvoiceRepository {
 	}
 
 	return s.invoice
+}
+
+func (s *Store) Payment() storage.PaymentRepository {
+	if s.payment == nil {
+		s.payment = &paymentRepo{s}
+	}
+
+	return s.payment
 }
 
 func New(db *sqlx.DB, log logger.Logger) *Store {

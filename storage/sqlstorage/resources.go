@@ -169,3 +169,30 @@ func newDbInvoice(m models.Invoice) dbInvoice {
 	}
 	return dd
 }
+
+type dbPayment struct {
+	Id     int       `db:"id"`
+	Time   time.Time `db:"time"`
+	Amount float64   `db:"amount"`
+	InvId  int       `db:"inv_id"`
+}
+
+func (dd dbPayment) toModel() models.Payment {
+	m := models.Payment{
+		Id:     dd.Id,
+		Time:   dd.Time,
+		Amount: dd.Amount,
+		InvId:  dd.InvId,
+	}
+	return m
+}
+
+func newDbPayment(m models.Payment) dbPayment {
+	dd := dbPayment{
+		Id:     m.Id,
+		Time:   m.Time,
+		Amount: m.Amount,
+		InvId:  m.InvId,
+	}
+	return dd
+}

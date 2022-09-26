@@ -76,6 +76,22 @@ definitions:
     - date
     - id
     type: object
+  rest.paymentParams:
+    properties:
+      amount:
+        type: number
+      id:
+        type: integer
+      inv_id:
+        type: integer
+      time:
+        type: string
+    required:
+    - amount
+    - id
+    - inv_id
+    - time
+    type: object
   rest.productParams:
     properties:
       category_id:
@@ -160,6 +176,19 @@ definitions:
     - cust_id
     - date
     type: object
+  rest.updatePaymentParams:
+    properties:
+      amount:
+        type: number
+      inv_id:
+        type: integer
+      time:
+        type: string
+    required:
+    - amount
+    - inv_id
+    - time
+    type: object
   rest.updateProductParams:
     properties:
       category_id:
@@ -241,6 +270,17 @@ definitions:
         type: string
       id:
         type: integer
+    type: object
+  views.payment:
+    properties:
+      amount:
+        type: number
+      id:
+        type: integer
+      inv_id:
+        type: integer
+      time:
+        type: string
     type: object
   views.product:
     properties:
@@ -1048,6 +1088,162 @@ paths:
       summary: Read all orders
       tags:
       - Order
+  /payment:
+    post:
+      consumes:
+      - application/json
+      description: API to create a payment
+      parameters:
+      - description: create payment request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.paymentParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Create payment
+      tags:
+      - Payment
+  /payment/{code}:
+    delete:
+      consumes:
+      - application/json
+      description: API to deactivate payment by id
+      parameters:
+      - description: payment id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Delete payment
+      tags:
+      - Payment
+    get:
+      consumes:
+      - application/json
+      description: API to get a payment by id
+      parameters:
+      - description: payment id
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  $ref: '#/definitions/views.payment'
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read one payment
+      tags:
+      - Payment
+    put:
+      consumes:
+      - application/json
+      description: API to update payment by id
+      parameters:
+      - description: payment id
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: update payment request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/rest.updatePaymentParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.R'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Update payment
+      tags:
+      - Payment
+  /payments:
+    get:
+      consumes:
+      - application/json
+      description: API to get all payments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/views.R'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/views.payment'
+                  type: array
+              type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/views.R'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.R'
+      summary: Read all payments
+      tags:
+      - Payment
   /product:
     post:
       consumes:

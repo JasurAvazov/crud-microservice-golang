@@ -16,6 +16,7 @@ type Storage interface {
 	Product() ProductRepository
 	Detail() DetailRepository
 	Invoice() InvoiceRepository
+	Payment() PaymentRepository
 }
 
 type RecordRetriever interface {
@@ -84,6 +85,17 @@ type InvoiceRepository interface {
 	Read(context.Context, string) (models.Invoice, error)
 	ReadAll(context.Context) ([]models.Invoice, error)
 	Update(context.Context, models.Invoice) error
+	Delete(context.Context, string) error
+	ClearAll(ctx context.Context) error
+}
+
+// PaymentRepository ...
+type PaymentRepository interface {
+	RecordRetriever
+	Create(context.Context, models.Payment) (models.Payment, error)
+	Read(context.Context, string) (models.Payment, error)
+	ReadAll(context.Context) ([]models.Payment, error)
+	Update(context.Context, models.Payment) error
 	Delete(context.Context, string) error
 	ClearAll(ctx context.Context) error
 }
